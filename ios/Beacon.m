@@ -94,7 +94,8 @@
                                                - sizeof(uidFrame.RFU))];
       
         // create a data structure with the beacon id bytes
-        NSData *idData = [NSData alloc] initBase64Encoded(base64Encoded: &uidFrame.beaconId, options: .ignoreUnknownCharacters);
+        NSData *idData = [NSData dataWithBytes:&uidFrame.beaconId
+                                        length:sizeof(uidFrame.beaconId)];
       
         // make sure we have a valid beacon id
         if(idData == nil) {

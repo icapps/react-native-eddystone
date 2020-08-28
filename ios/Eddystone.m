@@ -122,7 +122,7 @@
       // dispatch device event with beacon information
       [self sendEventWithName:eventName
                          body:@{
-                                @"id": beacon.id,
+                                @"id": [NSString stringWithFormat:@"%@", beacon.id],
                                 @"uid": [peripheral.identifier UUIDString],
                                 @"txPower": beacon.txPower,
                                 @"rssi": beacon.rssi

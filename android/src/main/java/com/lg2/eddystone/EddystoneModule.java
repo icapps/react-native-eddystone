@@ -22,10 +22,13 @@ import android.Manifest;
 import android.content.*;
 import android.bluetooth.*;
 import android.bluetooth.le.*;
+import android.content.pm.PackageManager;
 import android.os.ParcelUuid;
 
 import java.util.List;
 import java.util.ArrayList;
+
+import androidx.core.content.ContextCompat;
 
 public class EddystoneModule extends ReactContextBaseJavaModule {
   /** @property {ReactApplicationContext} The react app context */
@@ -290,15 +293,17 @@ public class EddystoneModule extends ReactContextBaseJavaModule {
 
     ScanSettings settings = new ScanSettings.Builder().setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY).build();
 
-    getCurrentActivity().requestPermissions(
-      new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
-      1
-    );
+    if (ContextCompat.checkSelfPermission(getCurrentActivity(),Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED  || ContextCompat.checkSelfPermission(getCurrentActivity(),Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+      getCurrentActivity().requestPermissions(
+        new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+        1
+      );
 
-    getCurrentActivity().requestPermissions(
-      new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-      1
-    );
+      getCurrentActivity().requestPermissions(
+        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+        1
+      );
+    }
 
     if (!bluetoothAdapter.isEnabled()) {
       Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);

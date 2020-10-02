@@ -225,8 +225,7 @@ public class EddystoneModule extends ReactContextBaseJavaModule {
         // reconstruct the beacon id from hex array
         StringBuilder builder = new StringBuilder();
         for (int i = 2; i < length + 2; i++) {
-          String st = String.format("%02X", serviceData[i]);
-          builder.append(st);
+          builder.append(String.format("%02X", serviceData[i]));
         }
 
         // create params object for javascript thread

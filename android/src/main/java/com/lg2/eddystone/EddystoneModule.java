@@ -293,18 +293,6 @@ public class EddystoneModule extends ReactContextBaseJavaModule {
 
     ScanSettings settings = new ScanSettings.Builder().setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY).build();
 
-    if (ContextCompat.checkSelfPermission(getCurrentActivity(),Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED  || ContextCompat.checkSelfPermission(getCurrentActivity(),Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-      getCurrentActivity().requestPermissions(
-        new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
-        1
-      );
-
-      getCurrentActivity().requestPermissions(
-        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-        1
-      );
-    }
-
     if (!bluetoothAdapter.isEnabled()) {
       Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
       getCurrentActivity().startActivityForResult(enableBtIntent, 8123);
